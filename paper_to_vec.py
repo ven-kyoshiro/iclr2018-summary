@@ -20,9 +20,7 @@ https://qiita.com/cheerfularge/items/27a55ebde4a671880666
 
 matplotlib error
 https://qiita.com/Kodaira_/items/1a3b801c7a5a41c9ce49
-
-'''
-
+''' 
 
 def prepro(file_name):  # read pickle and save as txt
     # papers =[[id,title,abstruct,html],]
@@ -38,7 +36,6 @@ def prepro(file_name):  # read pickle and save as txt
         f.write(text)
 
 def paper2vec():
-    #TODO:papers は337レコードなのに，こっちが一個多い
     prepro('iclr_2018_papers.pickle')
     f = open('train_data.txt','r')
     trainings = [TaggedDocument(
@@ -47,9 +44,9 @@ def paper2vec():
     m = Doc2Vec(
         documents= trainings, 
         dm = 1, 
-        vector_size=2,
-        window=3,
-        min_count=10,
+        vector_size=300,
+        window=15,
+        min_count=1,
         workers=2)
     m.save("model/doc2vec.model")
 
@@ -59,13 +56,13 @@ def coloring(file_name):
         papers = pickle.load(f)
     col = []
     for p in papers:
-        if 'reinforce' in p[1] or 'reinforce' in p[2]:
+        if 'reinforce' in p[1] or 'Reinforce' in p[1]:
             col.append('red')
-        elif 'GAN' in p[1] or 'GAN' in p[2]:
+        elif 'GAN' in p[1]:
             col.append('blue')
-        elif 'immitation' in p[1] or 'immitation' in p[2]:
+        elif 'immitation' in p[1] or 'Immitation' in p[1]:
             col.append('orange')
-        elif 'LSTM' in p[1] or 'LSTM' in p[2]:
+        elif 'LSTM' in p[1]:
             col.append('green')
         else:
             col.append('black')
