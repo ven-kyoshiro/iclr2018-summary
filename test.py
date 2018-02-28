@@ -1,7 +1,6 @@
 # _*_ coding:utf-8 _*_
 from get_papers import get_papers
 import pickle
-# import visualize_papers
 
 
 def list_to_md(data_list):
@@ -23,8 +22,6 @@ def main():
     text = list_to_md(papers)
     with open('papers.md', 'w') as f:
         f.write(text)  # 引数の文字列をファイルに書き込む
-    # visualize_papers(papers)
-# papers =[[id,title,abstruct,html],]
 
 
 if __name__ == '__main__':
